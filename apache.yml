@@ -11,3 +11,6 @@
     service: 
       name: nginx
       state: started
+ - name: install nodejs using shell
+    shell: |
+      curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && sudo apt-get install -y nodejs
