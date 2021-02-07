@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install apache package to target
+    apt: 
+      name: nginx
+  - name: start nginx server
+    service: 
+      name: nginx
+      state: started
