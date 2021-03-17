@@ -1,0 +1,20 @@
+---
+
+- hosts: jenkins-master
+  become: true
+  tasks: 
+  - name: Install Java 8
+    apt: 
+      update_cache: yes
+      name: openjdk-8-jdk
+  - name: Install Jenkins
+    shell: |
+      wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+      sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
+        /etc/apt/sources.list.d/jenkins.list'
+      sudo apt-get update -y
+      sudo apt-get install jenkins -y
+  - name: Start Jenkins
+    service: 
+      name: jenkins
+      state: started
