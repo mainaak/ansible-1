@@ -2,15 +2,18 @@
 
 - hosts: all
   become: true
-  tasks:
 
+  vars:
+    server: nginx
+
+  tasks:
   - name: install apache package to target
-    apt: 
-      name: nginx
+    package: 
+      name: "{{ server }}"
   - name: start nginx server
     service: 
       name: nginx
       state: started
- - name: install nodejs using shell
+  - name: install nodejs using shell
     shell: |
       curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - && sudo apt-get install -y nodejs
